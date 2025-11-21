@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+  <script src="https://cdn.jsdelivr.net/npm/jsencrypt@latest/bin/jsencrypt.min.js"></script>
   <body>
     <h1>点击右上角 。。。浏览器中打开</h1>
     <script>
@@ -8,12 +9,12 @@
         const params = new URLSearchParams(url);
         return params.get(name);
       }
-      const uValue = getUrlParam('u');
       if (uValue) {
-          const decodedValue = atob(uValue);
-        if (navigator.userAgent.indexOf('MicroMessenger') !== -1) {
-          alert('点击右上角 。。。浏览器中打开');
+        if (navigator.userAgent.indexOf("MicroMessenger") !== -1) {
+          alert("点击右上角 。。。浏览器中打开");
         } else {
+          const uValue = getUrlParam("u");
+          const decodedValue = atob(uValue);
           window.location.href = decodedValue;
         }
       }
