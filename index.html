@@ -9,11 +9,11 @@
         const params = new URLSearchParams(url);
         return params.get(name);
       }
+      const uValue = getUrlParam("u");
       if (uValue) {
         if (navigator.userAgent.indexOf("MicroMessenger") !== -1) {
           alert("点击右上角 。。。浏览器中打开");
         } else {
-          const uValue = getUrlParam("u");
           const decodedValue = atob(uValue);
           window.location.href = decodedValue;
         }
