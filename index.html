@@ -5,7 +5,7 @@
     <script src="https://cdn.bootcdn.net/ajax/libs/jsencrypt/3.5.4/jsencrypt.min.js"></script>
   </head>
   <body>
-    <h1>点击右上角 。。。浏览器中打开</h1>
+    <h1 id="message" style="text-align: center; font-size: 5em;">等待加载</h1>
     <script>
       function getUrlParam(name) {
         const url = window.location.search;
@@ -25,7 +25,7 @@
         uValue = uValue.replaceAll("_", "+");
         uValue = uValue.replaceAll("-", "/");
         if (navigator.userAgent.indexOf("MicroMessenger") !== -1) {
-          //alert("点击右上角 。。。浏览器中打开");
+          document.getElementById("message").textContent = "点击右上角 。。。浏览器中打开";
         } else {
           const decodedValue = decrypt(uValue);
           if (decodedValue) {
