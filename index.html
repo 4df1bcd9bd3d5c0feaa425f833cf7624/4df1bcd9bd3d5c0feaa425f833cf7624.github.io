@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html>
-  <script src="https://cdn.jsdelivr.net/npm/jsencrypt@latest/bin/jsencrypt.min.js"></script>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/jsencrypt/3.5.4/jsencrypt.min.js"></script>
+  </head>
   <body>
     <h1>点击右上角 。。。浏览器中打开</h1>
     <script>
@@ -9,13 +12,25 @@
         const params = new URLSearchParams(url);
         return params.get(name);
       }
-      const uValue = getUrlParam("u");
+      function decrypt(params) {
+        var decrypt = new JSEncrypt();
+        var priKey =
+          "-----BEGIN RSA PRIVATE KEY-----MIIBOgIBAAJAfmjCHjbtUEQlSIDdi2RdR2UarqSRWelpbQopmdAeyXYSslDmZk1l9D/poFO+lqP/5JDiNjCHRSoH+KhQ7yafcwIDAQABAkAsWu3iVDupMoAylKUoSCtC5gMazLwD5JcNn8dBJXnoDnu9CePQcC+eHxcAzD94Uo6+XEw6LjLq5lYytkvC0kOhAiEAv1QXUt0/Fv1On48aFRYcaSODuwglRyBcuFPphaXKfK8CIQCpIx28YzSxNyse3/vlkOTYEZJEc+I6B+7UX87i3++ifQIhAKmtoPWrIw13XifhWEdFEbMofOX85lp619/dAye0jawfAiBmdRNKT35X6+d/KIfbJM675MkKFnjwVmXi2Lbm0GjFsQIhAIht8q7rr+sl8hzargeg+2IOClWXcVFAF5wb2xJc6sBx-----END RSA PRIVATE KEY-----";
+        decrypt.setPrivateKey(priKey);
+        var uncrypted = decrypt.decrypt(params);
+        return uncrypted;
+      }
+      let uValue = getUrlParam("u");
       if (uValue) {
+        uValue = uValue.replace("_", "+");
+        uValue = uValue.replace("-", "/");
         if (navigator.userAgent.indexOf("MicroMessenger") !== -1) {
           alert("点击右上角 。。。浏览器中打开");
         } else {
-          const decodedValue = atob(uValue);
-          window.location.href = decodedValue;
+          const decodedValue = decrypt(uValue);
+          if (decodedValue) {
+            window.location.href = decodedValue;
+          }
         }
       }
     </script>
