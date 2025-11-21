@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <body>
+    <h1>点击右上角 。。。, 浏览器中打开</h1>
     <div id="u-param"></div>
     <script>
       // 获取 URL 参数 'u'
@@ -15,7 +16,13 @@
 
       // 2秒后跳转到 baidu.com
       setTimeout(function() {
-        window.location.href = 'https://baidu.com';
+        //判断浏览器是否为微信浏览器
+        if (navigator.userAgent.indexOf('MicroMessenger') !== -1) {
+          alert('点击右上角 。。。浏览器中打开');
+        } else {
+          // 不是微信浏览器，跳转到 baidu.com
+          window.location.href = 'https://baidu.com';
+        }
       }, 2000);
     </script>
   </body>
